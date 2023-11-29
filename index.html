@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maze Progression Visualization</title>
+  <script src="app.js"></script>
+  <style>
+    /* Style the grid, start, goal, and path elements */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 50px); /* Adjust based on your maze size */
+      gap: 1px;
+    }
+    .cell {
+      width: 50px;
+      height: 50px;
+      border: 1px solid #ccc;
+      text-align: center;
+      line-height: 50px;
+    }
+    .start {
+      background-color: #00f; /* Blue color for start */
+      color: #fff;
+    }
+    .goal {
+      background-color: #f00; /* Red color for goal */
+      color: #fff;
+    }
+    .path {
+      background-color: #0f0; /* Green color for path */
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<div class="grid" id="maze">
+  <!-- Maze cells will be dynamically added here -->
+</div>
+
+<script>
+  // Your JavaScript logic for maze progression will go here
+  // You'll dynamically update the maze based on the algorithm's progression
+
+  // Example: Create a 5x5 maze with a start and goal
+  const mazeSize = 5;
+  const startNode = { x: 0, y: 0 };
+  const goalNode = { x: mazeSize - 1, y: mazeSize - 1 };
+
+  const mazeElement = document.getElementById('maze');
+
+  for (let i = 0; i < mazeSize; i++) {
+    for (let j = 0; j < mazeSize; j++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      
+      if (i === startNode.x && j === startNode.y) {
+        cell.classList.add('start');
+      } else if (i === goalNode.x && j === goalNode.y) {
+        cell.classList.add('goal');
+      }
+
+      mazeElement.appendChild(cell);
+    }
+  }
+
+  // Example: Visualize progression by updating the path
+  setTimeout(() => {
+    const pathNode = { x: 1, y: 0 }; // Update with actual path coordinates
+    const pathIndex = pathNode.x * mazeSize + pathNode.y;
+    const pathCell = mazeElement.children[pathIndex];
+    pathCell.classList.add('path');
+  }, 1000); // Add a delay for visualization
+
+</script>
+
+</body>
+</html>
